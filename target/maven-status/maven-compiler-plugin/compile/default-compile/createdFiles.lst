@@ -1,0 +1,6 @@
+Car.class
+commands\GitAddCommand.class
+ApplicationConfig.class
+Engine.class
+commands\GitCommitCommand.class
+GitCommand.class

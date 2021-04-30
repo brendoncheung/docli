@@ -1,2 +1,4 @@
 *.iml
 .idea/*
+/target/docli-1.0-SNAPSHOT.jar
+/target/*
