@@ -97,7 +97,7 @@ then
   REPO="$BASEDIR"/repo
 fi
 
-CLASSPATH="$BASEDIR"/etc:"$REPO"/info/picocli/picocli/4.6.1/picocli-4.6.1.jar:"$REPO"/org/springframework/spring-beans/5.3.5/spring-beans-5.3.5.jar:"$REPO"/org/springframework/spring-core/5.3.5/spring-core-5.3.5.jar:"$REPO"/org/springframework/spring-jcl/5.3.5/spring-jcl-5.3.5.jar:"$REPO"/org/springframework/spring-context/5.3.5/spring-context-5.3.5.jar:"$REPO"/org/springframework/spring-aop/5.3.5/spring-aop-5.3.5.jar:"$REPO"/org/springframework/spring-expression/5.3.5/spring-expression-5.3.5.jar:"$REPO"/org/example/docli/1.0-SNAPSHOT/docli-1.0-SNAPSHOT.jar
+CLASSPATH="$BASEDIR"/etc:"$REPO"/info/picocli/picocli/4.6.1/picocli-4.6.1.jar:"$REPO"/org/xerial/sqlite-jdbc/3.34.0/sqlite-jdbc-3.34.0.jar:"$REPO"/org/springframework/spring-beans/5.3.5/spring-beans-5.3.5.jar:"$REPO"/org/springframework/spring-core/5.3.5/spring-core-5.3.5.jar:"$REPO"/org/springframework/spring-jcl/5.3.5/spring-jcl-5.3.5.jar:"$REPO"/org/springframework/spring-context/5.3.5/spring-context-5.3.5.jar:"$REPO"/org/springframework/spring-aop/5.3.5/spring-aop-5.3.5.jar:"$REPO"/org/springframework/spring-expression/5.3.5/spring-expression-5.3.5.jar:"$REPO"/org/example/docli/1.0-SNAPSHOT/docli-1.0-SNAPSHOT.jar
 
 ENDORSED_DIR=
 if [ -n "$ENDORSED_DIR" ] ; then
@@ -124,5 +124,5 @@ exec "$JAVACMD" $JAVA_OPTS  \
   -Dapp.repo="$REPO" \
   -Dapp.home="$BASEDIR" \
   -Dbasedir="$BASEDIR" \
-  GitCommand \
+  Docli \
   "$@"

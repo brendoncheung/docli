@@ -72,7 +72,7 @@ if "%JAVACMD%"=="" set JAVACMD=java
 
 if "%REPO%"=="" set REPO=%BASEDIR%\repo
 
-set CLASSPATH="%BASEDIR%"\etc;"%REPO%"\info\picocli\picocli\4.6.1\picocli-4.6.1.jar;"%REPO%"\org\springframework\spring-beans\5.3.5\spring-beans-5.3.5.jar;"%REPO%"\org\springframework\spring-core\5.3.5\spring-core-5.3.5.jar;"%REPO%"\org\springframework\spring-jcl\5.3.5\spring-jcl-5.3.5.jar;"%REPO%"\org\springframework\spring-context\5.3.5\spring-context-5.3.5.jar;"%REPO%"\org\springframework\spring-aop\5.3.5\spring-aop-5.3.5.jar;"%REPO%"\org\springframework\spring-expression\5.3.5\spring-expression-5.3.5.jar;"%REPO%"\org\example\docli\1.0-SNAPSHOT\docli-1.0-SNAPSHOT.jar
+set CLASSPATH="%BASEDIR%"\etc;"%REPO%"\info\picocli\picocli\4.6.1\picocli-4.6.1.jar;"%REPO%"\org\xerial\sqlite-jdbc\3.34.0\sqlite-jdbc-3.34.0.jar;"%REPO%"\org\springframework\spring-beans\5.3.5\spring-beans-5.3.5.jar;"%REPO%"\org\springframework\spring-core\5.3.5\spring-core-5.3.5.jar;"%REPO%"\org\springframework\spring-jcl\5.3.5\spring-jcl-5.3.5.jar;"%REPO%"\org\springframework\spring-context\5.3.5\spring-context-5.3.5.jar;"%REPO%"\org\springframework\spring-aop\5.3.5\spring-aop-5.3.5.jar;"%REPO%"\org\springframework\spring-expression\5.3.5\spring-expression-5.3.5.jar;"%REPO%"\org\example\docli\1.0-SNAPSHOT\docli-1.0-SNAPSHOT.jar
 
 set ENDORSED_DIR=
 if NOT "%ENDORSED_DIR%" == "" set CLASSPATH="%BASEDIR%"\%ENDORSED_DIR%\*;%CLASSPATH%
@@ -82,7 +82,7 @@ if NOT "%CLASSPATH_PREFIX%" == "" set CLASSPATH=%CLASSPATH_PREFIX%;%CLASSPATH%
 @REM Reaching here means variables are defined and arguments have been captured
 :endInit
 
-%JAVACMD% %JAVA_OPTS%  -classpath %CLASSPATH% -Dapp.name="docli" -Dapp.repo="%REPO%" -Dapp.home="%BASEDIR%" -Dbasedir="%BASEDIR%" GitCommand %CMD_LINE_ARGS%
+%JAVACMD% %JAVA_OPTS%  -classpath %CLASSPATH% -Dapp.name="docli" -Dapp.repo="%REPO%" -Dapp.home="%BASEDIR%" -Dbasedir="%BASEDIR%" Docli %CMD_LINE_ARGS%
 if %ERRORLEVEL% NEQ 0 goto error
 goto end
 
