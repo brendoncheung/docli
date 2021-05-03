@@ -1,22 +1,60 @@
 import database.Constants;
 import database.DocliDatabaseManager;
+import database.LocalSqliteRepository;
+import database.TodoRepository;
+import entities.Item;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import picocli.CommandLine;
+import picocli.CommandLine.Command;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
-import static picocli.CommandLine.*;
-
+@Command
 public class Docli {
 
+    @Autowired
+    private static DocliDatabaseManager manager;
+
+    @Autowired
+    private static TodoRepository repository;
+
     public static void main(String[] args) {
-        DocliDatabaseManager manager = new DocliDatabaseManager();
-        manager.createTable();
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+        manager = ctx.getBean(DocliDatabaseManager.class);
+        repository = ctx.getBean(LocalSqliteRepository.class);
+        initialization();
+
+        CommandLine commandLine = new CommandLine(Docli.class);
+        commandLine.execute(args);
+    }
+
+    private static void initialization() {
+        File config = new File("config.properties");
+        if(config.exists()) {
+            // user file exists
+        } else {
+            System.out.println("initializing....");
+            try {
+                config.createNewFile();
+                manager.createDatabaseFile(Constants.WORKING_DIRECTORY);
+                manager.executeStatement(Constants.CREATE_TABLE_ITEM);
+            } catch(IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    @Command
+    public void add(String description) {
+
+        Item item = new Item();
+        item.setDescription(description);
+        System.out.println(item.toString());
+        repository.add(item);
+
     }
 }
 

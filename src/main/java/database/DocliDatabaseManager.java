@@ -3,6 +3,8 @@ package database;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 
 @Data
@@ -12,31 +14,40 @@ public class DocliDatabaseManager {
     private Connection connection;
 
     public DocliDatabaseManager() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(Constants.JDBC_URL);
-            System.out.println(Constants.JDBC_URL);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
-    public boolean createTable() {
+    public boolean createDatabaseFile(String dir){
+        File db = new File(Constants.DATABASE_FILE_NAME);
         boolean res = false;
         try {
-            Statement smt = connection.createStatement();
-            String createTableString = "CREATE TABLE IF NOT EXISTS item" +
-                    "(id integer PRIMARY KEY AUTOINCREMENT," +
-                    "name text(200)," +
-                    "description text(200))";
+            res = db.createNewFile();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return res;
+    }
 
-            smt.execute(createTableString);
+    public boolean executeStatement(String sql){
+        boolean res;
+        if(connection == null) {
+            makeConnection();
+        }
+        try {
+            Statement smt = connection.createStatement();
+            smt.execute(sql);
             res = true;
         } catch(SQLException e) {
             System.out.println(e.getMessage());
             res = false;
         }
         return res;
+    }
 
+    private void makeConnection() {
+        try {
+            connection = DriverManager.getConnection(Constants.JDBC_URL);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

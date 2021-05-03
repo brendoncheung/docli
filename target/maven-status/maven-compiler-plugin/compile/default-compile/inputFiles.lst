@@ -1,6 +1,7 @@
-C:\Users\Brendon\Desktop\software\docli\src\main\java\ApplicationConfig.java
-C:\Users\Brendon\Desktop\software\docli\src\main\java\commands\CommitCommand.java
-C:\Users\Brendon\Desktop\software\docli\src\main\java\commands\AddCommand.java
-C:\Users\Brendon\Desktop\software\docli\src\main\java\Engine.java
-C:\Users\Brendon\Desktop\software\docli\src\main\java\Car.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\DocliDatabaseManager.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\Constants.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\LocalSqliteRepository.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\entities\Item.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\TodoRepository.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\BeanConfiguration.java
 C:\Users\Brendon\Desktop\software\docli\src\main\java\Docli.java

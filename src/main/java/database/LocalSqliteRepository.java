@@ -1,14 +1,15 @@
 package database;
 
 import entities.Item;
+import org.springframework.stereotype.Component;
 
-public class DocliRepository {
+@Component
+public class LocalSqliteRepository implements TodoRepository {
 
     private final DocliDatabaseManager manager;
 
-    public DocliRepository(DocliDatabaseManager manager) {
+    public LocalSqliteRepository(DocliDatabaseManager manager) {
         this.manager = manager;
-
     }
 
     public void add(Item item) {

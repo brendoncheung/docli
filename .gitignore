@@ -2,3 +2,5 @@
 .idea/*
 /target/docli-1.0-SNAPSHOT.jar
 /target/*
+config.properties
+docli_database.db

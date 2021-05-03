@@ -1,0 +1,7 @@
+database\DocliDatabaseManager.class
+database\LocalSqliteRepository.class
+database\TodoRepository.class
+entities\Item.class
+BeanConfiguration.class
+database\Constants.class
+Docli.class
