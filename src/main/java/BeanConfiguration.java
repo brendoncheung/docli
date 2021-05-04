@@ -2,7 +2,7 @@ import database.DocliDatabaseManager;
 import database.ExceptionHandler;
 import database.repository.LocalSqliteRepository;
 import database.repository.TodoRepository;
-import display.PromptDisplay;
+import display.PromptDisplayHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    PromptDisplay promptDisplayProvider() {
-        return new PromptDisplay();
+    PromptDisplayHandler promptDisplayProvider() {
+        return new PromptDisplayHandler();
     }
 
     @Bean
