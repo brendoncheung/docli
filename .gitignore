@@ -1,6 +1,6 @@
 *.iml
 .idea/*
 /target/docli-1.0-SNAPSHOT.jar
-/target/*
+/target/*.*
 config.properties
 docli_database.db

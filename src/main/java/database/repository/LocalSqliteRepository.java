@@ -2,10 +2,12 @@ package database.repository;
 
 import database.DocliDatabaseManager;
 import entities.Item;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -38,20 +40,23 @@ public class LocalSqliteRepository implements TodoRepository {
 
     }
 
+    @Nullable
     @Override
     public List<Item> getAll() {
         String s = "SELECT * FROM item";
-
+        List<Item> items = new ArrayList<Item>();
         ResultSet set = manager.executeDQLStatementSync(s);
         try {
             while(set.next()) {
-                String desc = set.getInt("id") + ": " + set.getString("description");
-                System.out.println(desc);
+                Item item = new Item();
+                item.setId(set.getInt("id"));
+                item.setDescription(set.getString("description"));
+                items.add(item);
             }
+            return items;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return null;
         }
-
-        return null;
     }
 }

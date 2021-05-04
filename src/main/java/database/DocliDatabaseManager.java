@@ -21,17 +21,6 @@ public class DocliDatabaseManager {
         this.handler = handler;
     }
 
-    public boolean createDatabaseFile(String dir){
-        File db = new File(dir, Constants.DATABASE_FILE_NAME);
-        boolean res = false;
-        try {
-            res = db.createNewFile();
-        } catch (IOException e) {
-            handler.handleIOException(e);
-        }
-        return res;
-    }
-
     public ResultSet executeDQLStatementSync(String sql){
         ResultSet res;
         if(connection == null) {
@@ -49,9 +38,11 @@ public class DocliDatabaseManager {
     }
 
     public void executeDMLStatementSync(String sql) {
+        if(connection == null) {
+            makeConnection();
+        }
         try {
             Statement smt = connection.createStatement();
-
             // https://stackoverflow.com/questions/37082904/getting-query-does-not-returns-results-sql-exception
             smt.executeUpdate(sql);
 
@@ -67,9 +58,4 @@ public class DocliDatabaseManager {
             handler.handleSQLException(e);
         }
     }
-}
-enum SQLLang {
-    DML,
-    DQL,
-    DCL,
 }
