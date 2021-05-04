@@ -1,7 +1,8 @@
 C:\Users\Brendon\Desktop\software\docli\src\main\java\database\DocliDatabaseManager.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\repository\LocalSqliteRepository.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\repository\TodoRepository.java
 C:\Users\Brendon\Desktop\software\docli\src\main\java\database\Constants.java
-C:\Users\Brendon\Desktop\software\docli\src\main\java\database\LocalSqliteRepository.java
 C:\Users\Brendon\Desktop\software\docli\src\main\java\entities\Item.java
-C:\Users\Brendon\Desktop\software\docli\src\main\java\database\TodoRepository.java
 C:\Users\Brendon\Desktop\software\docli\src\main\java\BeanConfiguration.java
 C:\Users\Brendon\Desktop\software\docli\src\main\java\Docli.java
+C:\Users\Brendon\Desktop\software\docli\src\main\java\database\ExceptionHandler.java

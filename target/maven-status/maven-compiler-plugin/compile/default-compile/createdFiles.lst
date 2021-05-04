@@ -1,7 +1,9 @@
 database\DocliDatabaseManager.class
-database\LocalSqliteRepository.class
-database\TodoRepository.class
+database\repository\LocalSqliteRepository.class
+database\repository\TodoRepository.class
+database\SQLLang.class
 entities\Item.class
+database\ExceptionHandler.class
 BeanConfiguration.class
 database\Constants.class
 Docli.class

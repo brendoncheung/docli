@@ -1,7 +1,7 @@
 import database.Constants;
 import database.DocliDatabaseManager;
-import database.LocalSqliteRepository;
-import database.TodoRepository;
+import database.repository.LocalSqliteRepository;
+import database.repository.TodoRepository;
 import entities.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -40,7 +40,7 @@ public class Docli {
             try {
                 config.createNewFile();
                 manager.createDatabaseFile(Constants.WORKING_DIRECTORY);
-                manager.executeStatement(Constants.CREATE_TABLE_ITEM);
+                manager.executeDQLStatementSync(Constants.CREATE_TABLE_ITEM);
             } catch(IOException e) {
                 System.out.println(e.getMessage());
             }
@@ -49,12 +49,14 @@ public class Docli {
 
     @Command
     public void add(String description) {
-
         Item item = new Item();
         item.setDescription(description);
-        System.out.println(item.toString());
         repository.add(item);
+    }
 
+    @Command
+    public void list() {
+        repository.getAll();
     }
 }
 

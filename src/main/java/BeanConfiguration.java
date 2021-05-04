@@ -1,6 +1,7 @@
 import database.DocliDatabaseManager;
-import database.LocalSqliteRepository;
-import database.TodoRepository;
+import database.ExceptionHandler;
+import database.repository.LocalSqliteRepository;
+import database.repository.TodoRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +9,13 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    DocliDatabaseManager manager() {
-        return new DocliDatabaseManager();
+    ExceptionHandler exceptionHandlerProvider() {
+        return new ExceptionHandler();
+    }
+
+    @Bean
+    DocliDatabaseManager docliDatabaseManagerprovider(ExceptionHandler handler) {
+        return new DocliDatabaseManager(handler);
     }
 
     @Bean

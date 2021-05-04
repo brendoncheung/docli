@@ -1,8 +1,11 @@
 package database;
 
 import lombok.Data;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import javax.swing.plaf.basic.DefaultMenuLayout;
+import javax.xml.transform.Result;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
@@ -12,42 +15,61 @@ import java.sql.*;
 public class DocliDatabaseManager {
 
     private Connection connection;
+    private final ExceptionHandler handler;
 
-    public DocliDatabaseManager() {
+    public DocliDatabaseManager(ExceptionHandler handler) {
+        this.handler = handler;
     }
 
     public boolean createDatabaseFile(String dir){
-        File db = new File(Constants.DATABASE_FILE_NAME);
+        File db = new File(dir, Constants.DATABASE_FILE_NAME);
         boolean res = false;
         try {
             res = db.createNewFile();
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            handler.handleIOException(e);
         }
         return res;
     }
 
-    public boolean executeStatement(String sql){
-        boolean res;
+    public ResultSet executeDQLStatementSync(String sql){
+        ResultSet res;
         if(connection == null) {
             makeConnection();
         }
         try {
             Statement smt = connection.createStatement();
-            smt.execute(sql);
-            res = true;
+            res = smt.executeQuery(sql);
+
         } catch(SQLException e) {
-            System.out.println(e.getMessage());
-            res = false;
+            handler.handleSQLException(e);
+            res = null;
         }
         return res;
+    }
+
+    public void executeDMLStatementSync(String sql) {
+        try {
+            Statement smt = connection.createStatement();
+
+            // https://stackoverflow.com/questions/37082904/getting-query-does-not-returns-results-sql-exception
+            smt.executeUpdate(sql);
+
+        } catch(SQLException e) {
+            handler.handleSQLException(e);
+        }
     }
 
     private void makeConnection() {
         try {
             connection = DriverManager.getConnection(Constants.JDBC_URL);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            handler.handleSQLException(e);
         }
     }
+}
+enum SQLLang {
+    DML,
+    DQL,
+    DCL,
 }
